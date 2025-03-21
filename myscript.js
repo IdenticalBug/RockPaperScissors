@@ -14,20 +14,6 @@ function getComputerChoice() {
     }
 }
 
-//function getHumanChoice(userInput) {
-    // Prompt user for input of strings "Rock" "Paper" or "Scissors" and store in variable
-    //If userInput is equal to Rock, return Rock
-    //if (userInput == "rock") {
-        //return "rock";
-    //else if userInput is Paper, return Paper
-    //} else if (userInput == "paper") {
-        //return "paper";
-    //else if userInput is Scissors, return Scissors
-    //} else if (userInput == "scissors") {
-        //return "scissors";
-    //}
-//}
-
 function playRound(humanChoice, computerChoice) {
     // If humanLowercase is rock and computerChoice is paper, say "You lose! Paper beats rock!" 
     // and return 0 to indicate computer wins.
@@ -59,6 +45,8 @@ function playRound(humanChoice, computerChoice) {
     } else if (humanChoice == "rock" && computerChoice == "Scissors") {
         winnerText.textContent = "You won! Rock beats scissors!";
         return 1;
+    } else{
+        winnerText.textContent = "It's a tie! Press a button again."
     }
 }
 
@@ -72,7 +60,6 @@ function calculateWinner(scoreOfHuman, scoreOfComputer){
 
 
 function playGame() {
-
     let humanScore = 0;
     let computerScore = 0;
     let winnerIs = null;
@@ -99,42 +86,10 @@ function playGame() {
         });   
 }
 
-        
-
-        /* rockBtn.addEventListener("click", () => {
-            playerSelection = "rock";
-            winnerIs = playRound(playerSelection, computerSelection);
-            
-        });
-        paperBtn.addEventListener("click", () => {
-            playerSelection = "paper";
-            winnerIs = playRound(playerSelection, computerSelection);
-            
-        });
-        sciBtn.addEventListener("click", () => {
-            playerSelection = "scissors";
-            winnerIs = playRound(playerSelection, computerSelection);
-            
-        });
-
-        if (winnerIs == 0 && buttonPressed) {
-            computerScore++;
-            compScore.textContent = `Computer Score: ${computerScore}`;
-        } else if(winnerIs == 1 && buttonPressed) {
-            humanScore++;
-            playerScore.textContent = `Your Score: ${humanScore}`;
-        } */
-  
-    //}
-    //Once 5 rounds are played, compare humanScore and computerScore to see who won, 
-    // then print a winning statement for whoever won.
 
 
 
 const buttons = document.querySelectorAll("button");
-//const rockBtn = document.querySelector("#Rock");
-//const paperBtn = document.querySelector("#Paper");
-//const sciBtn = document.querySelector("#Scissors");
 const playerScore = document.querySelector("#playerScore");
 const compScore = document.querySelector("#compScore");
 const winnerText = document.querySelector("#winnerText");
