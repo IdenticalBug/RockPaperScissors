@@ -60,8 +60,13 @@ function playRound(humanChoice, computerChoice) {
         winnerText.textContent = "You won! Rock beats scissors!";
         return 1;
     }
-    else {
-        winnerText.textContent = "It's a tie! Try again!";
+}
+
+function calculateWinner(scoreOfHuman, scoreOfComputer){
+    if (scoreOfHuman > scoreOfComputer) {
+        winnerText.textContent = "Congratulations, you have won!";
+    } else {
+        winnerText.textContent = "You have lost! Try again next time!";
     }
 }
 
@@ -70,52 +75,68 @@ function playGame() {
 
     let humanScore = 0;
     let computerScore = 0;
-    let playerSelection = ""
-    let winnerIs = 0;
+    let winnerIs = null;
+    let roundNumber = 0;
+    
+    
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const computerSelection = getComputerChoice();
+            winnerIs = playRound(button.id, computerSelection);
+            if (winnerIs == 0 && roundNumber != 5) {
+                computerScore++;
+                roundNumber++;
+                compScore.textContent = `Computer Score: ${computerScore}`;
+            } else if (winnerIs == 1 && roundNumber != 5) {
+                humanScore++;
+                roundNumber++;
+                playerScore.textContent = `Your Score: ${humanScore}`;
+            } else if (roundNumber == 5) {
+                calculateWinner(humanScore, computerScore);
+            }
+            
+            });
+        });   
+}
 
-    for (let i = 1; i <= 5; i++){
-        const computerSelection = getComputerChoice();
+        
 
-        rockBtn.addEventListener("click", () => {
+        /* rockBtn.addEventListener("click", () => {
             playerSelection = "rock";
             winnerIs = playRound(playerSelection, computerSelection);
-    
+            
         });
         paperBtn.addEventListener("click", () => {
             playerSelection = "paper";
-            winnerIs = playRound(playerSelection, computerSelection)
+            winnerIs = playRound(playerSelection, computerSelection);
+            
         });
         sciBtn.addEventListener("click", () => {
             playerSelection = "scissors";
-            winnerIs = playRound(playerSelection, computerSelection) 
+            winnerIs = playRound(playerSelection, computerSelection);
+            
         });
-  
-        if (winnerIs == 0) {
+
+        if (winnerIs == 0 && buttonPressed) {
             computerScore++;
             compScore.textContent = `Computer Score: ${computerScore}`;
-        } else {
+        } else if(winnerIs == 1 && buttonPressed) {
             humanScore++;
             playerScore.textContent = `Your Score: ${humanScore}`;
-        }
-    }
-
+        } */
+  
+    //}
     //Once 5 rounds are played, compare humanScore and computerScore to see who won, 
     // then print a winning statement for whoever won.
-    if (humanScore > computerScore) {
-        winnerText.textContent = "Congratulations, you have won!";
-    } else {
-        winnerText.textContent = "You have lost! Try again next time!";
-    }
-
-}
 
 
-const buttonClick = document.querySelectorAll("#buttonContainer");
-const rockBtn = document.querySelector("#Rock");
-const paperBtn = document.querySelector("#Paper");
-const sciBtn = document.querySelector("#Scissors");
+
+const buttons = document.querySelectorAll("button");
+//const rockBtn = document.querySelector("#Rock");
+//const paperBtn = document.querySelector("#Paper");
+//const sciBtn = document.querySelector("#Scissors");
 const playerScore = document.querySelector("#playerScore");
 const compScore = document.querySelector("#compScore");
 const winnerText = document.querySelector("#winnerText");
 
-document.getElementById("buttonClick").onclick = function() {playGame()};
+playGame();
